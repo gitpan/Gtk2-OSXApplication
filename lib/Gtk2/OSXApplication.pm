@@ -33,7 +33,7 @@ our @EXPORT = qw(
 	INFO_REQUEST
 );
 
-our $VERSION = '0.02';
+our $VERSION = '0.03';
 
 sub AUTOLOAD {
     # This AUTOLOAD is used to 'autoload' constants from the constant()
@@ -140,7 +140,7 @@ __END__
 
 =head1 NAME
 
-Gtk2::OSXApplication - Perl extension for blah blah blah
+Gtk2::OSXApplication - Perl extension for mac integration code GtkOSXApplication
 
 =head1 SYNOPSIS
 

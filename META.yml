@@ -1,7 +1,7 @@
 --- #YAML:1.0
 name:               Gtk2-OSXApplication
-version:            0.02
-abstract:           Perl extension for blah blah blah
+version:            0.03
+abstract:           Perl extension for mac integration code GtkOSXApplication
 author:
     - fam. Oesterholt <oesterholt@apple.com>
 license:            unknown
