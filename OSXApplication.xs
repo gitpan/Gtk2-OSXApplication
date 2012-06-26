@@ -70,13 +70,36 @@ void osxapplication_set_help_menu(self,item)
 	GtkMenuItem *_item=(GtkMenuItem *) item;
 	gtk_osxapplication_set_help_menu(_self,_item);
 
-void gtk_osxapplication_set_dock_menu(self,menu_shell)
+void osxapplication_set_dock_menu(self,menu_shell)
 	GObject *self
 	GObject *menu_shell
    CODE:
 	GtkOSXApplication *_self=(GtkOSXApplication *) self;
 	GtkMenuShell *_shell=(GtkMenuShell *) menu_shell;
 	gtk_osxapplication_set_dock_menu(_self,_shell);
+
+
+void osxapplication_set_dock_icon_pixbuf(self,pixbuf)
+	GObject *self
+	GObject *pixbuf
+   CODE:
+	GtkOSXApplication *_self=(GtkOSXApplication *) self;
+	GdkPixbuf *_pixbuf=(GdkPixbuf *) pixbuf;
+	gtk_osxapplication_set_dock_icon_pixbuf(_self,_pixbuf);
+
+
+void osxapplication_set_dock_icon_resource(self,name,type,subdir)
+	GObject *self
+	const char *name
+	const char *type
+	const char *subdir
+   CODE:
+	GtkOSXApplication *_self=(GtkOSXApplication *) self;
+	const gchar *_name=(const gchar *) name;
+	const gchar *_type=(const gchar *) type;
+	const gchar *_subdir=(const gchar *) subdir;
+	gtk_osxapplication_set_dock_icon_resource(_self,_name,_type,_subdir);
+	
 
 
 

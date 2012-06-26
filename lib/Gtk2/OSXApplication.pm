@@ -33,7 +33,7 @@ our @EXPORT = qw(
 	INFO_REQUEST
 );
 
-our $VERSION = '0.01';
+our $VERSION = '0.02';
 
 sub AUTOLOAD {
     # This AUTOLOAD is used to 'autoload' constants from the constant()
@@ -119,6 +119,20 @@ sub set_dock_menu {
   osxapplication_set_dock_menu($self->{osxapp},$shell);
 }
 
+sub set_dock_icon_pixbuf {  
+  my $self=shift;
+  my $pixbuf=shift;
+  osxapplication_set_dock_icon_pixbuf($self->{osxapp},$pixbuf);
+}
+
+sub set_dock_icon_resource {  
+  my $self=shift;
+  my $name=shift;  
+  my $type=shift;
+  my $subdir=shift;
+  osxapplication_set_dock_icon_resource($self->{osxapp},$name,$type,$subdir);
+}
+
 
 1;
 __END__
@@ -136,6 +150,26 @@ Gtk2::OSXApplication - Perl extension for blah blah blah
   ...
   $osxapp->set_menu_bar($bar);
   $osxapp->ready();
+
+A sample from my CuePlay application:
+
+  if ($os eq "darwin") {
+    require Gtk2::OSXApplication;
+    my $app=new Gtk2::OSXApplication();
+    my $menubar=Gtk2::MenuBar->new();
+    my $menu=Gtk2::Menu->new();
+    my $item=Gtk2::MenuItem->new_with_label("Info");
+    $item->set_submenu($menu);
+    my $about=Gtk2::MenuItem->new_with_label("About");
+    $menu->append($about);
+    $menubar->append($item);
+    $about->show();
+    $item->show();
+    $menu->show();
+    $menubar->show();
+    $app->set_menu_bar($menubar);
+    $app->ready();
+  }
 
 =head1 DESCRIPTION
 

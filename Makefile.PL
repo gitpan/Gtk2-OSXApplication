@@ -13,12 +13,15 @@ my $lib=<$fh>;
 chomp $lib;
 close $fh;
 
-#my $perl2gtkInc="-I".$ENV{HOME}."/gtk/inst/lib/perl5/site_perl/5.12.3/darwin-thread-multi-2level/Glib/Install";
+my $os=$^O;
+if ($os ne "darwin") {
+  die "This module is only for OS X";
+}
 
 WriteMakefile(
     NAME              => 'Gtk2::OSXApplication',
     VERSION_FROM      => 'lib/Gtk2/OSXApplication.pm', # finds $VERSION
-    PREREQ_PM         => {}, # e.g., Module::Name => 1.1
+    PREREQ_PM         => { Gtk2 => 1.2 }, # e.g., Module::Name => 1.1
     ($] >= 5.005 ?     ## Add these new keywords supported since 5.005
       (ABSTRACT_FROM  => 'lib/Gtk2/OSXApplication.pm', # retrieve abstract from module
        AUTHOR         => 'fam. Oesterholt <oesterholt@apple.com>') : ()),
@@ -31,7 +34,6 @@ WriteMakefile(
 );
 
 # Work around a OS X bug (Lion)
-my $os=$^O;
 if ($os eq "darwin") {
   print "Fixing i386 bug for OSX\n";
   open my $fh,"<Makefile"; 
