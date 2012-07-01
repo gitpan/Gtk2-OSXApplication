@@ -6,6 +6,7 @@
 #include <glib.h>
 //#include <gtk2perl.h>
 #include <gperl.h>
+#include <Carbon/Carbon.h>
 
 MODULE = Gtk2::OSXApplication		PACKAGE = Gtk2::OSXApplication		
 
@@ -100,6 +101,11 @@ void osxapplication_set_dock_icon_resource(self,name,type,subdir)
 	const gchar *_subdir=(const gchar *) subdir;
 	gtk_osxapplication_set_dock_icon_resource(_self,_name,_type,_subdir);
 	
-
+void osxapplication_activate_app(self)
+	GObject *self
+   CODE:
+       ProcessSerialNumber PSN;
+       GetCurrentProcess(&PSN);
+       SetFrontProcess(&PSN);
 
 

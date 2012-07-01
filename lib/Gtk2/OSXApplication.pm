@@ -33,7 +33,7 @@ our @EXPORT = qw(
 	INFO_REQUEST
 );
 
-our $VERSION = '0.03';
+our $VERSION = '0.04';
 
 sub AUTOLOAD {
     # This AUTOLOAD is used to 'autoload' constants from the constant()
@@ -133,6 +133,11 @@ sub set_dock_icon_resource {
   osxapplication_set_dock_icon_resource($self->{osxapp},$name,$type,$subdir);
 }
 
+sub activate {
+  my $self=shift;
+  osxapplication_activate_app($self->{osxapp});
+}
+
 
 1;
 __END__
@@ -184,6 +189,11 @@ Exports the following functions of GtkOSXApplication:
  $self->set_dock_menu($menu_shell)
  $self->set_dock_icon_pixbuf($pixbuf)
  $self->set_dock_icon_resource($name,$type,$subdir)
+
+
+ $self->activate()
+
+ Activates this application. Use this before using Gtk::Window->present();
 
 =head1 AUTHOR
 
