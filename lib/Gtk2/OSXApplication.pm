@@ -33,7 +33,7 @@ our @EXPORT = qw(
 	INFO_REQUEST
 );
 
-our $VERSION = '0.05';
+our $VERSION = '0.06';
 
 sub AUTOLOAD {
     # This AUTOLOAD is used to 'autoload' constants from the constant()
@@ -197,7 +197,7 @@ Exports the following functions of GtkOSXApplication:
 
 =head1 AUTHOR
 
-fam. Oesterholt, E<lt>hans@oesterholt.netE<gt>
+Hans Oesterholt, E<lt>oesterhol@cpan.orgE<gt>
 
 =head1 COPYRIGHT AND LICENSE
 

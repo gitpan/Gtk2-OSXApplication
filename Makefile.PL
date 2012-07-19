@@ -3,19 +3,27 @@ use ExtUtils::MakeMaker;
 # See lib/ExtUtils/MakeMaker.pm for details of how to influence
 # the contents of the Makefile that is written.
 
-open my $fh,"pkg-config --cflags gtk-mac-integration |";
-my $inc=<$fh>;
-chomp $inc;
-close $fh;
+my $skip=shift @ARGV;
 
-open $fh,"pkg-config --libs gtk-mac-integration |";
-my $lib=<$fh>;
-chomp $lib;
-close $fh;
+my $inc;
+my $lib;
+my $os;
 
-my $os=$^O;
-if ($os ne "darwin") {
-  die "This module is only for OS X";
+if ($skip ne "skip") {
+  open my $fh,"pkg-config --cflags gtk-mac-integration |";
+  $inc=<$fh>;
+  chomp $inc;
+  close $fh;
+
+  open $fh,"pkg-config --libs gtk-mac-integration |";
+  $lib=<$fh>;
+  chomp $lib;
+  close $fh;
+
+  $os=$^O;
+  if ($os ne "darwin") {
+    die "This module is only for OS X";
+  }
 }
 
 WriteMakefile(
@@ -24,7 +32,7 @@ WriteMakefile(
     PREREQ_PM         => { Gtk2 => 1.2 }, # e.g., Module::Name => 1.1
     ($] >= 5.005 ?     ## Add these new keywords supported since 5.005
       (ABSTRACT_FROM  => 'lib/Gtk2/OSXApplication.pm', # retrieve abstract from module
-       AUTHOR         => 'fam. Oesterholt <oesterholt@apple.com>') : ()),
+       AUTHOR         => 'Hans Oesterholt <oesterhol@cpan.org>') : ()),
     LIBS              => [$lib], # e.g., '-lm'
     DEFINE            => '', # e.g., '-DHAVE_SOMETHING'
     #INC               => '-I.'." $inc $perl2gtkInc", # e.g., '-I. -I/usr/include/other'
